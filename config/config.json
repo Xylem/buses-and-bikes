@@ -1,0 +1,8 @@
+{
+    "townsFile": "towns.json",
+    "busParameters": {
+        "capacity": 50,
+        "travellingTime": 100,
+        "timePerPerson": 1
+    }
+}

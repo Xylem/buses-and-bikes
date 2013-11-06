@@ -1,0 +1,14 @@
+[
+    {
+        "name": "Katowice",
+        "population": 1000
+    },
+    {
+        "name": "Gliwice",
+        "population": 800
+    },
+    {
+        "name": "Warszawa",
+        "population": 400
+    }
+]
