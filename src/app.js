@@ -1,4 +1,4 @@
-var fs = require("fs");
+"use strict";
 
 var config = require("../config/config.json");
 var Scheduler = require("./simulator/Scheduler");

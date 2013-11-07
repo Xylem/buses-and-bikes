@@ -1,5 +1,7 @@
 "use strict";
 
+var commons = require("../utils/commons");
+
 function Scheduler () {
     this.events = [];
 }
@@ -16,18 +18,6 @@ Scheduler.prototype.registerEventEmitter = function (eventEmitter) {
     });
 };
 
-function curry (fn, scope) {
-    var args = [];
-
-    for (var i=2, len = arguments.length; i < len; ++i) {
-        args.push(arguments[i]);
-    }
-
-    return function() {
-        fn.apply(scope, args);
-    };
-}
-
 Scheduler.prototype.runEvent = function () {
     var event = this.events.shift();
 
@@ -35,7 +25,7 @@ Scheduler.prototype.runEvent = function () {
 
     //setImmediate(this.runEvent);
 
-    setTimeout(curry(this.runEvent, this), 1000);
+    setTimeout(commons.curry(this.runEvent, this), 1000);
 };
 
 module.exports = Scheduler;
