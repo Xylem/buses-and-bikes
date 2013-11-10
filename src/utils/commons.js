@@ -1,7 +1,7 @@
 "use strict";
 
 /**
- * Curries a function, applying given scope and arguments
+ * Curries a function, applying given scope and arguments.
  *
  * @param {Function} fn function to curry
  * @param {Object} scope scope in which the curried function should be executed
