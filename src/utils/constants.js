@@ -1,11 +1,11 @@
 "use strict";
 
 exports.SCHEDULER_MODE = {
-    FULL_SPEED: {},
-    STEP: {}
+    FULL_SPEED: "FULL_SPEED",
+    STEP: "STEP"
 };
 
 exports.DIRECTION = {
-    FORWARDS: {},
-    BACKWARDS: {}
+    FORWARDS: "FORWARDS",
+    BACKWARDS: "BACKWARDS"
 };

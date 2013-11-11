@@ -2,8 +2,20 @@
     "name": "buses-and-bikes",
     "version": "0.0.1",
     "private": true,
+    "scripts": {
+        "test": "grunt test"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Xylem/buses-and-bikes.git"
+    },
     "devDependencies": {
         "grunt": "0.4.x",
-        "grunt-jsdoc": "0.4.x"
+        "grunt-jsdoc": "0.4.x",
+        "mocha": "1.14.x",
+        "should": "2.1.x",
+        "sinon": "1.7.x",
+        "grunt-simple-mocha": "0.4.x",
+        "xunit-file": "0.0.x"
     }
 }
