@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: utils/commons.js</title>
+    <title>JSDoc: Source: simulation/Town.js</title>
     
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">Source: utils/commons.js</h1>
+    <h1 class="page-title">Source: simulation/Town.js</h1>
     
     
 
@@ -28,24 +28,38 @@
             <pre class="prettyprint source"><code>"use strict";
 
 /**
- * Curries a function, applying given scope and arguments.
+ * Creates new instance of Town.
  *
- * @param {Function} fn function to curry
- * @param {Object} scope scope in which the curried function should be executed
- * @param {...*} V_ARGS arguments to apply to the function
- * @returns {Function} curried function
+ * @param {Number} population population of the town
+ * @param {String} name name of the town
+ * @constructor
  */
-exports.curry = function curry (fn, scope, V_ARGS) {
-    var args = [];
+function Town (population, name) {
+    this.population = population;
+    this.availablePopulation = population;
+    this.name = name;
+}
 
-    for (var i=2, len = arguments.length; i &lt; len; ++i) {
-        args.push(arguments[i]);
-    }
+/**
+ * Generates random number of people wanting to enter the vehicle, removes a fraction of people that couldn't enter from
+ * the pool of available people and returns the number of people that entered.
+ *
+ * @param {Number} maxPeople maximum number of people that can enter the vehicle
+ * @returns {Number} number of people entering the vehicle
+ */
+Town.prototype.getPeople = function (maxPeople) {
+    var waiting = Math.ceil(Math.random() * this.availablePopulation * 0.1);
 
-    return function() {
-        fn.apply(scope, args);
-    };
-};</code></pre>
+    var entering = Math.min(maxPeople, waiting);
+
+    this.availablePopulation -= Math.ceil((waiting - entering) * 0.5);
+
+    console.log("%s, Waiting: %d, Entered: %d, Population: %d, Remaining: %d", this.name, waiting, entering, this.population, this.availablePopulation);
+
+    return entering;
+};
+
+module.exports = Town;</code></pre>
         </article>
     </section>
 

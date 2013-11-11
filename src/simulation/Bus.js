@@ -7,13 +7,15 @@ var commons = require("../utils/commons");
 /**
  * Creates new instance of Bus.
  *
+ * @param {Number} id identifier of the bus
  * @param {{capacity: Number,
  *          travellingTime: Number,
  *          timePerPerson: Number}} configuration object containing configuration of the bus
  * @param {Object} townProvider an instance of TownProvider
  * @constructor
  */
-function Bus (configuration, townProvider) {
+function Bus (id, configuration, townProvider) {
+    this.id = id;
     this.configuration = configuration;
     this.townProvider = townProvider;
     this.onBoard = 0;
@@ -45,7 +47,7 @@ Bus.prototype.run = function (time, town, direction) {
     var leavingPeople = Math.floor(Math.random() * this.onBoard);
     this.onBoard -= leavingPeople;
 
-    var enteringPeople = Math.min(this.configuration.capacity - this.onBoard, Math.floor(Math.random() * (town.population * 0.1)));
+    var enteringPeople = town.getPeople(this.configuration.capacity - this.onBoard);
     this.onBoard += enteringPeople;
 
     var travelTime = this.configuration.travellingTime + this.configuration.timePerPerson * this.onBoard;
@@ -59,8 +61,8 @@ Bus.prototype.run = function (time, town, direction) {
         run: commons.curry(this.run, this, nextStopTime, nextStop.town, nextStop.direction)
     });
 
-    console.log(util.format("Stop: %s, Arrived: %d, Left: %d, Entered: %d, On board: %d",
-        town.name, time, leavingPeople, enteringPeople, this.onBoard));
+    console.log(util.format("Bus %d - Stop: %s, Arrived: %d, Left: %d, Entered: %d, On board: %d",
+        this.id, town.name, time, leavingPeople, enteringPeople, this.onBoard));
 };
 
 module.exports = Bus;

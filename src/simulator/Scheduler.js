@@ -43,7 +43,7 @@ Scheduler.prototype.runEvent = function () {
     event.run();
 
     if (this.mode === SCHEDULER_MODE.FULL_SPEED) {
-        setImmediate(this.runEvent);
+        setImmediate(commons.curry(this.runEvent, this));
     } else {
         setTimeout(commons.curry(this.runEvent, this), 1000);
     }

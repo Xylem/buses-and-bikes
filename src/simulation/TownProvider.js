@@ -1,5 +1,6 @@
 "use strict";
 
+var Town = require("./Town");
 var DIRECTION = require("../utils/constants").DIRECTION;
 
 /**
@@ -16,7 +17,9 @@ function TownProvider () {
  * @param {String} filePath path to the JSON file containing the array of towns
  */
 TownProvider.prototype.loadTowns = function (filePath) {
-    this.towns = require(filePath);
+    this.towns = require(filePath).map(function (town) {
+        return new Town(town.population, town.name);
+    });
 };
 
 /**
