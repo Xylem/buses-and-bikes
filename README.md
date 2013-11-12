@@ -1,6 +1,6 @@
 # buses-and-bikes
 
-[![Build Status](https://travis-ci.org/Xylem/buses-and-bikes.png?branch=master)](https://travis-ci.org/Xylem/buses-and-bikes)
+[![Build Status](https://travis-ci.org/Xylem/buses-and-bikes.png?branch=master)](https://travis-ci.org/Xylem/buses-and-bikes) [![Coverage Status](https://coveralls.io/repos/Xylem/buses-and-bikes/badge.png)](https://coveralls.io/r/Xylem/buses-and-bikes)
 
 A project for Digital Modelling and Simulations.
 

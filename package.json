@@ -3,7 +3,10 @@
     "version": "0.0.1",
     "private": true,
     "scripts": {
-        "test": "grunt test"
+        "test": "grunt test",
+        "blanket": {
+            "pattern": "src"
+        }
     },
     "repository": {
         "type": "git",
@@ -19,7 +22,10 @@
         "mocha": "1.14.x",
         "should": "2.1.x",
         "sinon": "1.7.x",
-        "grunt-simple-mocha": "0.4.x",
-        "xunit-file": "0.0.x"
+        "grunt-mocha-test": "0.7.x",
+        "xunit-file": "0.0.x",
+        "blanket": "1.1.x",
+        "coveralls": "2.3.x",
+        "mocha-lcov-reporter": "0.0.x"
     }
 }

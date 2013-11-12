@@ -10,31 +10,52 @@ module.exports = function (grunt) {
                 }
             }
         },
-        simplemocha: {
-            options: {
-                timeout: 3000,
-                ignoreLeaks: false,
-                reporter: "spec"
+        mochaTest: {
+            test: {
+                options: {
+                    timeout: 3000,
+                    ignoreLeaks: false,
+                    reporter: "spec"
+                },
+                src: [ "test/**/*Test.js" ]
             },
-            all: {
-                src: "test/**/*Test.js"
+            coverage: {
+                options: {
+                    timeout: 3000,
+                    ignoreLeaks: false,
+                    require: "./coverage/blanket",
+                    reporter: "mocha-lcov-reporter",
+                    quiet: true,
+                    captureFile: "coverage.lcov"
+                },
+                src: [ "test/**/*Test.js" ]
             }
         }
     });
 
+    var log = require("./src/utils/log");
+
+    log.configure(__dirname + "/config/logger-test.json");
+
     grunt.loadNpmTasks("grunt-jsdoc");
-    grunt.loadNpmTasks("grunt-simple-mocha");
+    grunt.loadNpmTasks("grunt-mocha-test");
 
     grunt.registerTask("test", function () {
-        var log = require("./src/utils/log");
-
-        log.configure(__dirname + "/config/logger-test.json");
-
         var reporter = this.args[0] || "spec";
         process.env["XUNIT_FILE"] = this.args[1] || "";
 
-        grunt.config.set("simplemocha.options.reporter", reporter);
+        grunt.config.set("mochaTest.test.options.reporter", reporter);
 
-        grunt.task.run("simplemocha");
+        grunt.task.run("mochaTest:test");
+    });
+
+    grunt.registerTask("pipeCoverage", function () {
+        grunt.util.spawn({
+            cmd: "cat coverage.lcov | ./node_modules/coveralls/bin/coveralls.js"
+        });
+    });
+
+    grunt.registerTask("coverage", function () {
+        grunt.task.run(["mochaTest:coverage", "pipeCoverage"]);
     });
 };
