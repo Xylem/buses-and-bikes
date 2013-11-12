@@ -1,6 +1,6 @@
 "use strict";
 
-var should = require("should");
+require("should");
 var sinon = require("sinon");
 var Scheduler = require("../../src/simulator/Scheduler");
 var SCHEDULER_MODE = require("../../src/utils/constants").SCHEDULER_MODE;

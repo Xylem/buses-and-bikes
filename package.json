@@ -9,6 +9,10 @@
         "type": "git",
         "url": "https://github.com/Xylem/buses-and-bikes.git"
     },
+    "dependencies": {
+        "optimist": "0.6.x",
+        "log4js": "0.6.x"
+    },
     "devDependencies": {
         "grunt": "0.4.x",
         "grunt-jsdoc": "0.4.x",

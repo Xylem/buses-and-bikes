@@ -3,6 +3,7 @@
 var EventEmitter = require("events").EventEmitter;
 var util = require("util");
 var commons = require("../utils/commons");
+var logger = require("../utils/log").getLogger();
 
 /**
  * Creates new instance of Bus.
@@ -61,8 +62,8 @@ Bus.prototype.run = function (time, town, direction) {
         run: commons.curry(this.run, this, nextStopTime, nextStop.town, nextStop.direction)
     });
 
-    console.log(util.format("Bus %d - Stop: %s, Arrived: %d, Left: %d, Entered: %d, On board: %d",
-        this.id, town.name, time, leavingPeople, enteringPeople, this.onBoard));
+    logger.debug("Bus %d - Stop: %s, Arrived: %d, Left: %d, Entered: %d, On board: %d",
+        this.id, town.name, time, leavingPeople, enteringPeople, this.onBoard);
 };
 
 module.exports = Bus;

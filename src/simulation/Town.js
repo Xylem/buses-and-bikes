@@ -1,5 +1,7 @@
 "use strict";
 
+var logger = require("../utils/log").getLogger();
+
 /**
  * Creates new instance of Town.
  *
@@ -27,7 +29,8 @@ Town.prototype.getPeople = function (maxPeople) {
 
     this.availablePopulation -= Math.ceil((waiting - entering) * 0.5);
 
-    console.log("%s, Waiting: %d, Entered: %d, Population: %d, Remaining: %d", this.name, waiting, entering, this.population, this.availablePopulation);
+    logger.debug("%s, Waiting: %d, Entered: %d, Population: %d, Remaining: %d",
+        this.name, waiting, entering, this.population, this.availablePopulation);
 
     return entering;
 };

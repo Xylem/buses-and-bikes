@@ -1,5 +1,9 @@
 {
     "townsFile": "towns.json",
+    "logger": {
+        "verbose": "logger-verbose.json",
+        "silent": "logger-silent.json"
+    },
     "busParameters": {
         "capacity": 50,
         "travellingTime": 100,

@@ -26,6 +26,10 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks("grunt-simple-mocha");
 
     grunt.registerTask("test", function () {
+        var log = require("./src/utils/log");
+
+        log.configure(__dirname + "/config/logger-test.json");
+
         var reporter = this.args[0] || "spec";
         process.env["XUNIT_FILE"] = this.args[1] || "";
 

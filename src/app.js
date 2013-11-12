@@ -1,6 +1,27 @@
 "use strict";
 
 var config = require("../config/config.json");
+var optimist = require("optimist");
+
+var argv = optimist
+               .boolean("v")
+               .alias("v", "verbose")
+               .describe("v", "Prints logs to console")
+               .boolean("h")
+               .alias("h", "help")
+               .describe("h", "Prints this help")
+               .argv;
+
+if (argv.help) {
+    optimist.showHelp();
+    return;
+}
+
+var log = require("./utils/log");
+var loggerConfigPath = __dirname + "/../config/" + (argv.verbose ? config.logger.verbose : config.logger.silent);
+
+log.configure(loggerConfigPath);
+
 var Scheduler = require("./simulator/Scheduler");
 var scheduler = new Scheduler();
 
