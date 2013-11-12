@@ -30,6 +30,11 @@ module.exports = function (grunt) {
                 },
                 src: [ "test/**/*Test.js" ]
             }
+        },
+        shell: {
+            pipeCoverage: {
+                command: "cat coverage.lcov | ./node_modules/coveralls/bin/coveralls.js"
+            }
         }
     });
 
@@ -39,6 +44,7 @@ module.exports = function (grunt) {
 
     grunt.loadNpmTasks("grunt-jsdoc");
     grunt.loadNpmTasks("grunt-mocha-test");
+    grunt.loadNpmTasks("grunt-shell");
 
     grunt.registerTask("test", function () {
         var reporter = this.args[0] || "spec";
@@ -49,13 +55,7 @@ module.exports = function (grunt) {
         grunt.task.run("mochaTest:test");
     });
 
-    grunt.registerTask("pipeCoverage", function () {
-        grunt.util.spawn({
-            cmd: "cat coverage.lcov | ./node_modules/coveralls/bin/coveralls.js"
-        });
-    });
-
     grunt.registerTask("coverage", function () {
-        grunt.task.run(["mochaTest:coverage", "pipeCoverage"]);
+        grunt.task.run(["mochaTest:coverage", "shell:pipeCoverage"]);
     });
 };
