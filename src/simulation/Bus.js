@@ -62,6 +62,18 @@ Bus.prototype.run = function (time, town, direction) {
         run: commons.curry(this.run, this, nextStopTime, nextStop.town, nextStop.direction)
     });
 
+    this.emit("stats", {
+        busId: this.id,
+        time: time,
+        town: {
+            name: town.name,
+            availablePopulation: town.availablePopulation
+        },
+        leavingPeople: leavingPeople,
+        enteringPeople: enteringPeople,
+        onBoard: this.onBoard
+    });
+
     logger.debug("Bus %d - Stop: %s, Arrived: %d, Left: %d, Entered: %d, On board: %d",
         this.id, town.name, time, leavingPeople, enteringPeople, this.onBoard);
 };

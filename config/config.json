@@ -1,5 +1,7 @@
 {
+    "port": 3000,
     "townsFile": "towns.json",
+    "busesFile": "buses.json",
     "logger": {
         "verbose": "logger-verbose.json",
         "silent": "logger-silent.json"

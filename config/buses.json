@@ -1,0 +1,10 @@
+[
+    {
+        "town": "Katowice",
+        "direction": "FORWARDS"
+    },
+    {
+        "town": "Warszawa",
+        "direction": "BACKWARDS"
+    }
+]

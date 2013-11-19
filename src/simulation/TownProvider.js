@@ -57,4 +57,23 @@ TownProvider.prototype.getNextTown = function (currentTown, direction) {
     };
 };
 
+function asName (town) {
+    return town.name;
+}
+
+/**
+ * Returns town based on the town name given or null if town does not exits.
+ *
+ * @param {String} townName searched town name
+ * @returns {Town} found town or null
+ */
+TownProvider.prototype.getTownByName = function (townName) {
+    var townIndex = this.towns.map(asName).indexOf(townName);
+
+    if (townIndex === -1) {
+        return null;
+    }
+    return this.towns[townIndex];
+};
+
 module.exports = TownProvider;

@@ -5,15 +5,15 @@ var TownProvider = require("../../src/simulation/TownProvider");
 var DIRECTION = require("../../src/utils/constants").DIRECTION;
 
 describe("simulation/TownProvider.js", function () {
+    var townProvider;
+    var TOWNS = [{ name: "Test1" }, { name: "Test2" }, { name: "Test3" }, { name: "Test4" }];
+
+    before(function () {
+        townProvider = new TownProvider();
+        townProvider.towns = TOWNS;
+    });
+
     describe("#getNextTown", function () {
-        var townProvider;
-        var TOWNS = [{ name: "Test1" }, { name: "Test2" }, { name: "Test3" }, { name: "Test4" }];
-
-        before(function () {
-            townProvider = new TownProvider();
-            townProvider.towns = TOWNS;
-        });
-
         it("should return next town and retain direction when going forwards from non-last town", function () {
             var nextTown = townProvider.getNextTown(TOWNS[2], DIRECTION.FORWARDS);
 
@@ -40,6 +40,20 @@ describe("simulation/TownProvider.js", function () {
 
             nextTown.town.should.equal(TOWNS[1]);
             nextTown.direction.should.equal(DIRECTION.FORWARDS);
+        });
+    });
+
+    describe("#getTownByName", function () {
+        it("should return the town object when town with given name exists", function () {
+            var town = townProvider.getTownByName("Test3");
+
+            town.should.equal(TOWNS[2]);
+        });
+
+        it("should return null when town with given name doesn't exist", function () {
+            var town = townProvider.getTownByName("Test5");
+
+            (town === null).should.be.true;
         });
     });
 });
